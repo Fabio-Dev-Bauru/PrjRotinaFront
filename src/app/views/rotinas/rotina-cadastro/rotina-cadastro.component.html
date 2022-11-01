@@ -1,0 +1,66 @@
+<form [formGroup]="form" (ngSubmit)="OnSubmit()">
+  <div class="card">
+
+    <!-- Cabeçalho -->
+    <div class="card-header">
+      {{pageTitle}}
+    </div>
+
+    <div class="card-body">
+      <!-- Formulário -->
+
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label" for="Nome">Nome</label>
+          <div class="col-md-7">
+            <input formControlName="Nome" type="text" id="Nome"
+                   class="form-control text-dark"
+                   [ngClass]="AplicaCssErro('Nome')"
+                   placeholder="Informe nome da Rotina"
+                   >
+            <app-erro [controle]="RetornaCampo('Nome')" nomeCampo="Nome" class="invalid-tooltip"></app-erro>
+            <input formControlName="Id" type="hidden" id="Id" readonly>
+          </div>
+        </div>
+
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label" for="Detalhes">Detalhes</label>
+          <div class="col-md-7">
+            <textarea class="form-control" name="Detalhes" id="Detalhes" rows="3"
+                      [ngClass]="AplicaCssErro('Detalhes')"
+                      placeholder="Informe os detalhes da Rotina"
+                      formControlName="Detalhes"></textarea>
+            <app-erro [controle]="RetornaCampo('Detalhes')" nomeCampo="Detalhes" class="invalid-tooltip"></app-erro>
+          </div>
+        </div>
+
+        <div class="form-group row" *ngIf="showStatus">
+          <label for="Concluido" class="col-md-2 col-form-label">Conclusão</label>
+          <div class="col-md-4 mt-1">
+            <div class="col-auto custom-control custom-checkbox">
+              <input type="checkbox" class="me-2 custom-control-input" id="Concluido" formControlName="Concluido">
+              <label for="Concluido" class="custom-control-label">Marque se essa Rotina já foi finalizada</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ações -->
+        <div class="form-group row mb-2">
+          <div class="offset-md-2 col-md-5">
+            <button type="submit" class="btn btn-primary mr-2">Salvar</button>
+            <button type="button" class="btn btn-outline-danger ms-2" title="Voltar"
+                    routerLink="/rotinas"
+                    [queryParams]="{ 'texto': texto }">Cancelar
+            </button>
+            <!-- <button type="button" class="btn btn-outline-danger" *ngIf="pageTitle != 'Adicionar Tarefa'"
+              title="Excluir esta tarefa" (click)="excluirTarefa()">
+              Excluir
+            </button> -->
+
+          </div>
+        </div>
+    </div>
+  </div>
+</form>
+
+
+

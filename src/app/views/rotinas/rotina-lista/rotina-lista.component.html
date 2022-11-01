@@ -1,0 +1,62 @@
+<div [formGroup]="form">
+  <div class="card">
+    <div class="card-header mb-4">
+      <div class="d-flex justify-content-between">
+        <div class="mt-2"><strong>Minhas Rotinas</strong></div>
+        <div>
+          <button class="btn btn-primary" [routerLink]="['/rotinas/cadastrar']">
+            <i class="fa fa-plus"></i> Nova Rotina
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="input-group mb-2 p-2">
+      <input type="text" class="form-control text-dark" id="Texto" formControlName="Texto" placeholder="Pesquisa" />
+      <label for="Texto" class="text-dark"></label>
+      <button class="btn btn-primary" type="button" (click)="Submit()">
+        <i class="fa fa-search"></i>
+      </button>
+    </div>
+
+
+
+    <div class="table-responsive-x1 border-top">
+        <table class="table mb-0 table-hover">
+            <thead class="t-dark">
+              <tr>
+                  <th>Nome</th>
+                  <th>Status</th>
+                  <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let rotina of lista">
+                <td>
+                  {{rotina.nome}}
+                </td>
+                <td>
+                  <label class="text-dark" [ngClass]="rotina.concluido ? 'badge bg-success' : 'badge bg-warning'" style="font-size: small;">{{(rotina.concluido ? 'Concluido' : 'Pendente')}}</label>
+                </td>
+                <td>
+                  <button class="btn btn-outline-primary btn-sm mr-2"
+                          [routerLink]="['/rotinas', rotina.id]"
+                          [queryParams]="{ 'texto': form.value.Texto }">
+                      <i class="fa fa-edit"></i>
+                  </button>
+                  <button class="btn btn-outline-danger btn-sm" (click)="excluirTarefa(rotina.id);">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+
+  </div>
+
+
+</div>
+
+
+
