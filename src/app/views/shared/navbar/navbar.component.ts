@@ -1,3 +1,4 @@
+import { AuthService } from './../../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { bufferToggle } from 'rxjs';
 
@@ -9,8 +10,11 @@ import { bufferToggle } from 'rxjs';
 export class NavbarComponent implements OnInit {
 
   isExpanded: boolean = false;
+  status: boolean = false;
+  exibir: boolean = false;
+  exibirDropDownSair: boolean = false;
 
-  constructor() {
+  constructor(public authService: AuthService) {
 
 
   }

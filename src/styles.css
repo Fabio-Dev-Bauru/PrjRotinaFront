@@ -1,7 +1,7 @@
 @import "~bootstrap/dist/css/bootstrap.css";
-@import "~font-awesome/css/font-awesome.css";
+@import '../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
 
-html, body {
+/* html, body {
   height: 100%;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -9,6 +9,21 @@ html, body {
   background-size: cover;
   background: rgb(90, 103, 114);
   background: radial-gradient(rgb(20, 22, 27));
+} */
+
+html, body {
+  height: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background: rgb(0,78,151);
+  background: linear-gradient(to bottom, rgba(90, 103, 114) 95%, rgba(20, 22, 27) 100%, rgb(61, 65, 66)00%);
 }
 
-
+.logo{
+  content:url("assets/Imagens/Icone.png");
+  margin-bottom: 10px !important;
+  width: 400px;
+  max-width: 80%;
+}

@@ -1,0 +1,33 @@
+<form [formGroup]="form" class="conteudo-login text-center" (ngSubmit)="OnSubmit()">
+  <div class="form-signin ">
+    <div class="conteudo-form p-3">
+
+      <div class="titulo">Projeto CRUD Rotinas</div>
+
+       <div class="mt-3">
+        <div class="form-floating mb-3">
+          <input formControlName="Login" type="email" class="form-control bg-transparent bordaEmbaixo text-white" id="Login" placeholder="Usuário"
+          [ngClass]="AplicaCssErro('Login')">
+          <label for="Login" class="text-light">Usuário</label>
+          <app-erro [controle]="RetornaCampo('Login')" nomeCampo="Login" class="invalid-tooltip"></app-erro>
+        </div>
+
+        <div class="form-floating input-group mb-2">
+          <input formControlName="Senha" [type]="exibirSenhaTexto ? 'text' : 'password'" class="form-control bg-transparent bordaEmbaixo text-white" id="Senha" placeholder="Senha"
+          [ngClass]="AplicaCssErro('Senha')">
+          <button type="button" class="btn btn-sm btn-light border-0 bg-transparent border-bottom border-light" (click)="exibirSenhaTexto=!exibirSenhaTexto">
+            <i [ngClass]="exibirSenhaTexto ? 'far fa-eye-slash text-light' : 'far fa-eye text-light'"></i>
+          </button>
+          <label for="Senha" class="text-light">Senha</label>
+          <app-erro [controle]="RetornaCampo('Senha')" nomeCampo="Senha" class="invalid-tooltip"></app-erro>
+        </div>
+
+        <button class="w-100 btn btn-lg btn-light textoAzul" type="submit">Acessar</button>
+       </div>
+
+
+    </div>
+
+
+  </div>
+</form>
