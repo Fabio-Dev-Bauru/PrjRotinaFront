@@ -1,0 +1,39 @@
+<nav *ngIf="Quantidade > 1" aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item" [ngClass]="{'disabled': Pagina === 1}">
+      <button class="page-link" style="background-color: #afc718;" (click)="Pagina = 1; OnSubmit()">
+        <span aria-hidden="true">&laquo;</span>
+      </button>
+    </li>
+    <li class="page-item" [ngClass]="{'disabled' : Pagina === 1}">
+      <button class="page-link" style="background-color: #afc718;" (click)="Pagina = Pagina-1; OnSubmit()">
+        <span aria-hidden="true">&lt;</span>
+      </button>
+    </li>
+    <li class="page-item" [ngClass]="{'disabled': Pagina === 1, 'd-none': Pagina < 4}">
+      <button class="page-link" style="background-color: #afc718;" (click)="Pagina = RetornarBotao10Anteriores(); OnSubmit()">
+        <span aria-hidden="true">{{RetornarBotao10Anteriores()}}</span>
+      </button>
+    </li>
+    <li *ngFor='let item of RetornarPaginas()' class="page-item" [ngClass]="{'active': item.pagina === Pagina}">
+      <button class="page-link" [ngStyle]="{'background-color': Pagina == item.pagina ? '#004e97' : '#afc718' }" (click)="Pagina = item.pagina; OnSubmit()">
+        {{item.pagina}}
+      </button>
+    </li>
+    <li class="page-item" [ngClass]="{'disabled': Pagina === Quantidade || Quantidade === 0, 'd-none': RetornarBotao10Proximo() === 1 || Pagina > Quantidade-3}">
+      <button class="page-link" style="background-color: #afc718;" (click)="Pagina = RetornarBotao10Proximo(); OnSubmit()">
+        <span aria-hidden="true">{{RetornarBotao10Proximo()}}</span>
+      </button>
+    </li>
+    <li class="page-item" [ngClass]="{'disabled': Pagina === Quantidade || Quantidade === 0}">
+      <button class="page-link" style="background-color: #afc718;" (click)="Pagina = Pagina+1; OnSubmit()">
+        <span aria-hidden="true">&gt;</span>
+      </button>
+    </li>
+    <li class="page-item" [ngClass]="{'disabled': Pagina === Quantidade || Quantidade === 0}">
+      <button class="page-link" style="background-color: #afc718;" (click)="Pagina = Quantidade; OnSubmit()">
+        <span aria-hidden="true">&raquo;</span>
+      </button>
+    </li>
+  </ul>
+</nav>

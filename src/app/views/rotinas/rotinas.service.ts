@@ -2,6 +2,7 @@ import { map, Observable } from 'rxjs';
 import { HttpService } from './../../services/http.service';
 import { Injectable } from '@angular/core';
 import { Rotina } from 'src/app/models/Rotina';
+import { ObjetoQuantidade } from 'src/app/models/ObjetoQuantidade';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +11,9 @@ export class RotinasService {
 
   constructor(private httpService: HttpService<Rotina>) { }
 
-  GetLista(texto: string = ""): Observable<Rotina[]> {
-    return this.httpService.GetList(`Rotinas/lista/${texto}`)
-    .pipe(map((x: Rotina[]) => {
+  GetLista(pagina: number, texto: string) {
+    return this.httpService.GetList(`Rotinas/lista/${pagina}/${texto}`)
+    .pipe(map(x => {
       return x;
     }));
   }

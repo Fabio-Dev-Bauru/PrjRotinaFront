@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../shared/navbar/navbar.component';
+import { PaginacaoComponent } from './paginacao/paginacao.component';
 
 
 
@@ -10,6 +11,7 @@ import { NavbarComponent } from '../shared/navbar/navbar.component';
   declarations: [
     NavbarComponent,
     ErroComponent,
+    PaginacaoComponent,
   ],
   imports: [
     CommonModule,
@@ -18,6 +20,7 @@ import { NavbarComponent } from '../shared/navbar/navbar.component';
   exports: [
     NavbarComponent,
     ErroComponent,
+    PaginacaoComponent,
   ]
 })
 export class SharedModule { }

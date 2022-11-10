@@ -1,4 +1,5 @@
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { ObjetoQuantidade } from './../../../models/ObjetoQuantidade';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { RotinasService } from '../rotinas.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -20,12 +21,19 @@ export class RotinaListaComponent implements OnInit {
               private router: Router) { }
 
   lista: Rotina[];
+  quantidade: number = 0;
+  pagina: number = 1;
+  obj: ObjetoQuantidade<Rotina>;
 
   ngOnInit(): void {
     this.InicializarForm();
 
     this.activatedRoute.queryParams.subscribe(
       (queryParams: any) => {
+
+        if (queryParams["pagina"]) {
+          this.pagina = Number(queryParams["pagina"]);
+        }
 
         if (queryParams["texto"]) {
             this.form.patchValue({
@@ -51,16 +59,28 @@ export class RotinaListaComponent implements OnInit {
   }
 
   CarregarLista() {
-    this.service.GetLista(this.form.value.Texto)
+    var  lista: Rotina[];
+    this.service.GetLista(this.pagina, this.RetornaCampo('Texto').value)
     .pipe(first())
-    .subscribe({
-      next: (rotina: Rotina[]) => this.lista = rotina
-    });
-    console.log(this.lista);
+    .subscribe( x => {
+      this.lista = x;
+      console.log(this.lista)
+    })
   }
 
   Submit() {
-    this.router.navigate([], { queryParams: { "texto": this.form.value.Texto }});
+    this.activatedRoute.queryParams.subscribe(
+      (queryParams: any) => {
+        if (queryParams["texto"] != this.RetornaCampo('Texto').value)
+          this.pagina = 1;
+      }
+    );
+
+    this.router.navigate([], { queryParams: { "pagina": this.pagina, "texto": this.RetornaCampo('Texto').value  } });
+  }
+
+  RetornaCampo(campo: string) : FormControl {
+    return this.form.get(campo) as FormControl;
   }
 
   excluirTarefa(id: string): void {
@@ -70,6 +90,11 @@ export class RotinaListaComponent implements OnInit {
         this.router.navigate(["/rotinas"]);
       });
 
+  }
+
+  AlterarPagina(pagina: number) {
+    this.pagina = pagina;
+    this.Submit();
   }
 
 }
